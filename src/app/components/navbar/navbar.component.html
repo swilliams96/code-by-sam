@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md navbar-dark navbar-right">
+  <div class="navbar-collapse" id="navbar-links">
+    <div class="navbar-nav ml-auto">
+      <a
+        class="nav-item nav-link d-none d-md-block"
+        [routerLink]="['/']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Home
+      </a>
+      <a class="nav-item nav-link d-none d-md-block" (click)="scrollService.scrollTo(aboutSectionId, '')">
+        About
+      </a>
+      <a class="nav-item nav-link d-none d-md-block" (click)="scrollService.scrollTo(projectsSectionId, '')">
+        Projects
+      </a>
+      <a
+        class="nav-item nav-link text-right"
+        [routerLink]="['/contact']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Get In Touch
+      </a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Raleway Thin';
+  src: url('~src/assets/fonts/Raleway-Thin.ttf');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('~src/assets/fonts/Ubuntu-Light.ttf');
+}
+
+* {
+  font-family: Ubuntu, sans-serif;
+}

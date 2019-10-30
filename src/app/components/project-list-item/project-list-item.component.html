@@ -1,0 +1,29 @@
+<div class="project row">
+  <div class="project-image-container col-lg-3 offset-lg-1">
+    <a [routerLink]="['/projects/', project.slug]">
+      <ng-container *ngIf="project.images && project.images.length > 0; else noImages">
+        <img class="project-image" [src]="project.images[0]" draggable="false" />
+      </ng-container>
+    </a>
+    <ng-template #noImages>
+      <img class="project-image" src="./assets/images/placeholder.jpg" draggable="false" />
+    </ng-template>
+  </div>
+
+  <div class="project-content col-lg-7 text-left">
+    <div class="project-body">
+      <h2 class="project-title">
+        <a [routerLink]="['/projects/', project.slug]">{{ project.title }}</a>
+      </h2>
+      <p class="project-description">{{ project.description }}</p>
+    </div>
+    <div class="project-footer">
+      <p class="project-date mb-1">
+        <i>Date: {{ project.date }}</i>
+      </p>
+      <app-project-tags [tags]="project.tags"></app-project-tags>
+    </div>
+  </div>
+</div>
+
+<hr />

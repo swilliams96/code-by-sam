@@ -1,0 +1,57 @@
+@import './src/sass/variables';
+@import './src/sass/fonts';
+@import './src/sass/bootstrap';
+@import "node_modules/bootstrap/scss/bootstrap";
+
+:root {
+  --highlight-color-primary: $selection-colour;
+  --link-color-primary: $primary-colour;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  color: #222;
+  background: #ddd !important;
+  min-width: 300px;
+}
+
+*::selection {
+  background: rgba(8, 132, 180, 0.6);
+  color: #fff;
+}
+
+img::selection,
+nav *::selection,
+#projects-button *::selection,
+#menu *::selection,
+.project-tag::selection {
+  background: transparent;
+}
+
+a {
+  color: #00beff;
+}
+
+a:hover,
+a:active {
+  color: #0076a3;
+}
+
+section {
+  padding-bottom: 80px;
+
+  .section-heading {
+    font-weight: 900;
+    font-size: 32px;
+  }
+}
+
+#projects hr {
+  max-width: 150px;
+  border: 1px solid grey;
+  background: grey;
+  margin: 30px auto;
+}
