@@ -16,7 +16,7 @@ window.projects = [
       heroes. A number of Python 3 web scrapers collect data from game's wiki to ensure the questions and their answers are always kept up to date.`,
     date: '2018',
     url: 'https://swilliams96.github.io/shopkeepers-quiz/',
-    tags: ['React', 'TypeScript', 'Python 3', 'Node.JS'],
+    tags: ['TypeScript', 'React', 'Python 3', 'Node.JS'],
     images: ['./assets/images/projects/shopkeepers-quiz/screenshot-1-square.jpg']
   },
   {
@@ -27,6 +27,6 @@ window.projects = [
       images & videos, as well as a form that contacts the site-owner by email.`,
     date: '2019',
     url: 'https://www.jamiejo.co.uk/',
-    tags: ['Angular 2', 'TypeScript']
+    tags: ['TypeScript', 'Angular 2']
   }
 ];

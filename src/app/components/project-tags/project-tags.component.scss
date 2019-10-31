@@ -2,9 +2,10 @@
 
 .project-tag {
   display: inline-block;
-  background-color: adjust-color($color: $tag-colour, $saturation: -10%, $lightness: 10%, $alpha: -0.5);
-  color: adjust-color($color: $tag-colour, $saturation: -20%, $lightness: 35%);
-  transition: 0.1s background-color, 0.1s color;
+  background-color: adjust-color($color: $tag-colour, $saturation: -10%, $lightness: 10%);
+  color: adjust-color($color: $tag-colour, $saturation: -20%, $lightness: 40%);
+  opacity: .6;
+  transition: .1s all;
   border-radius: 4px;
   padding: 1px 6px;
   margin: 1px 0;
@@ -14,5 +15,6 @@
   &:hover {
     background-color: $tag-colour;
     color: white;
+    opacity: 1;
   }
 }

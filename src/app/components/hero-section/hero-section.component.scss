@@ -108,6 +108,10 @@
     font-size: 20px;
     color: #fff;
   }
+
+  @media (max-width: 767px) {
+    margin-top: calc(10vh - 40px);
+  }
 }
 
 /* SMALL DESKTOP */

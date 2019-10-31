@@ -2,9 +2,9 @@
   <div class="navbar-collapse" id="navbar-links">
     <div class="navbar-nav ml-auto">
       <a
-        class="nav-item nav-link d-none d-md-block"
+        class="nav-item nav-link"
         [routerLink]="['/']"
-        routerLinkActive="active"
+        routerLinkActive="active d-none d-md-block"
         [routerLinkActiveOptions]="{ exact: true }"
       >
         Home
@@ -18,7 +18,7 @@
       <a
         class="nav-item nav-link text-right"
         [routerLink]="['/contact']"
-        routerLinkActive="active"
+        routerLinkActive="active d-none d-md-block"
         [routerLinkActiveOptions]="{ exact: true }"
       >
         Get In Touch
@@ -26,3 +26,5 @@
     </div>
   </div>
 </nav>
+
+<div class="nav-bg"></div>

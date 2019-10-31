@@ -1,0 +1,13 @@
+@import './src/sass/variables';
+
+:host > .container,
+:host > .container-fluid {
+  min-height: calc(100vh - 180px);
+  margin-bottom: 50px;
+}
+
+.project {
+  .project-title {
+    color: #222;
+  }
+}

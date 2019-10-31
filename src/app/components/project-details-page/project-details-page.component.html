@@ -1,3 +1,25 @@
-<p>project-details-page works!</p>
+<div class="container-fluid">
+  <div class="project row">
+    <div class="project-image-container col-lg-3 offset-lg-1">
+      <ng-container *ngIf="project.images && project.images.length > 0; else noImages">
+        <img class="project-image" [src]="project.images[0]" draggable="false" />
+      </ng-container>
+      <ng-template #noImages>
+        <img class="project-image" src="./assets/images/placeholder.jpg" draggable="false" />
+      </ng-template>
+    </div>
 
-{{ project | json }}
+    <div class="project-content col-lg-7 text-left">
+      <div class="project-body">
+        <h2 class="project-title">{{ project.title }}</h2>
+        <p class="project-description">{{ project.description }}</p>
+      </div>
+      <div class="project-footer">
+        <p class="project-date mb-1">
+          <i>Date: {{ project.date }}</i>
+        </p>
+        <app-project-tags [tags]="project.tags"></app-project-tags>
+      </div>
+    </div>
+  </div>
+</div>
