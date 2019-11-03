@@ -17,7 +17,10 @@ window.projects = [
     date: '2018',
     url: 'https://swilliams96.github.io/shopkeepers-quiz/',
     tags: ['TypeScript', 'React', 'Python 3', 'Node.JS'],
-    images: ['./assets/images/projects/shopkeepers-quiz/screenshot-1-square.jpg']
+    images: [
+      './assets/images/projects/shopkeepers-quiz/screenshot-2-square.jpg',
+      './assets/images/projects/shopkeepers-quiz/screenshot-1-square.jpg'
+    ]
   },
   {
     title: 'Portfolio Websites',

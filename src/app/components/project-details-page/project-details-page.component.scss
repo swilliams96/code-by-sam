@@ -2,12 +2,38 @@
 
 :host > .container,
 :host > .container-fluid {
-  min-height: calc(100vh - 180px);
-  margin-bottom: 50px;
+  min-height: calc(100vh - 190px - 3vw);
+  margin-bottom: 60px;
 }
 
 .project {
   .project-title {
     color: #222;
+  }
+
+  .project-additional-images {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 4px -4px;
+
+    img {
+      flex: 0 0 auto;
+      cursor: pointer;
+      height: 64px;
+      width: auto;
+      border: 2px solid white;
+      margin: 4px;
+      filter: grayscale(.25);
+
+      &.active {
+        filter: brightness(2.5);
+      }
+    }
+
+    .fill {
+      flex: 1 1 auto;
+    }
   }
 }

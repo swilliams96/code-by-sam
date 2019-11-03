@@ -1,15 +1,25 @@
 <div class="container-fluid">
   <div class="project row">
-    <div class="project-image-container col-lg-3 offset-lg-1">
+    <div class="project-image-container col-lg-4 offset-lg-1">
       <ng-container *ngIf="project.images && project.images.length > 0; else noImages">
-        <img class="project-image" [src]="project.images[0]" draggable="false" />
+        <img class="project-image" [src]="project.images[selectedImageIndex] || project.images[0]" draggable="false" />
+        <div class="project-additional-images" *ngIf="project.images.length > 1">
+          <img
+            *ngFor="let image of project.images; let i = index"
+            (click)="selectImage(i)"
+            [src]="project.images[i]"
+            [ngClass]="{active: i === selectedImageIndex}"
+            draggable="false"
+          />
+          <div class="fill"></div>
+        </div>
       </ng-container>
       <ng-template #noImages>
         <img class="project-image" src="./assets/images/placeholder.jpg" draggable="false" />
       </ng-template>
     </div>
 
-    <div class="project-content col-lg-7 text-left">
+    <div class="project-content col-lg-6 text-left">
       <div class="project-body">
         <h2 class="project-title">{{ project.title }}</h2>
         <p class="project-description">{{ project.description }}</p>
