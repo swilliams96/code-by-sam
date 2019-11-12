@@ -11,5 +11,17 @@ export class ProjectListItemComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  get shortDescription(): string | undefined {
+    if (!this.project || !this.project.description) {
+      return;
+    }
+
+    if (this.project.description.length <= 375) {
+      return this.project.description;
+    } else {
+      return this.project.description.substr(0, 370) + '…';
+    }
+  }
 }

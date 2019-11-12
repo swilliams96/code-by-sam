@@ -8,7 +8,7 @@
             *ngFor="let image of project.images; let i = index"
             (click)="selectImage(i)"
             [src]="project.images[i]"
-            [ngClass]="{active: i === selectedImageIndex}"
+            [ngClass]="{ active: i === selectedImageIndex }"
             draggable="false"
           />
           <div class="fill"></div>
@@ -19,10 +19,21 @@
       </ng-template>
     </div>
 
-    <div class="project-content col-lg-6 text-left">
+    <div class="project-content col-lg-6 col-xl-5 text-left">
       <div class="project-body">
-        <h2 class="project-title">{{ project.title }}</h2>
+        <h2 class="project-title">
+          {{ project.title }}
+          <a *ngIf="project.url" [href]="project.url" target="_blank" class="text-primary">
+            <span class="far fa-chevron-circle-right mt-2"></span>
+          </a>
+        </h2>
         <p class="project-description">{{ project.description }}</p>
+        <p>
+          <a *ngIf="project.url" [href]="project.url" target="_blank" class="text-primary font-weight-bold">
+            <em>Visit site</em>
+            <span class="far fa-chevron-circle-right ml-1"></span>
+          </a>
+        </p>
       </div>
       <div class="project-footer">
         <p class="project-date mb-1">
