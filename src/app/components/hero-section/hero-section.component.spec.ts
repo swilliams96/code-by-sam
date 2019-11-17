@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeroSectionComponent } from './hero-section.component';
+import { ScrollService } from 'src/app/services/scroll.service';
 
 describe('HeroComponent', () => {
   let component: HeroSectionComponent;
@@ -8,9 +9,9 @@ describe('HeroComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeroSectionComponent ]
-    })
-    .compileComponents();
+      declarations: [HeroSectionComponent],
+      providers: [{ provide: ScrollService, useValue: {} }]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

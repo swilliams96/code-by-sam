@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="project row">
+  <div *ngIf="project; else noProject" class="project row">
     <div class="project-image-container col-lg-4 offset-lg-1">
       <ng-container *ngIf="project.images && project.images.length > 0; else noImages">
         <img class="project-image" [src]="project.images[selectedImageIndex] || project.images[0]" draggable="false" />
@@ -44,3 +44,12 @@
     </div>
   </div>
 </div>
+
+<ng-template #noProject>
+  <div class="text-center my-4">
+    <app-loading-spinner></app-loading-spinner>
+    <p class="mt-3">
+      <em>Project not found&hellip;</em>
+    </p>
+  </div>
+</ng-template>

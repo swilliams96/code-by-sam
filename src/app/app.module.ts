@@ -13,6 +13,7 @@ import { ProjectTagsComponent } from './components/project-tags/project-tags.com
 import { ProjectDetailsPageComponent } from './components/project-details-page/project-details-page.component';
 import { RouterModule } from '@angular/router';
 import { TagDetailsPageComponent } from './components/tag-details-page/tag-details-page.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TagDetailsPageComponent } from './components/tag-details-page/tag-detai
     ProjectListItemComponent,
     ProjectTagsComponent,
     TagDetailsPageComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
