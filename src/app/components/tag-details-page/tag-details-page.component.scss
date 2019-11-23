@@ -1,0 +1,11 @@
+.results {
+  margin-bottom: 60px;
+}
+
+:host::ng-deep .project-title a {
+  color: unset !important;
+}
+
+hr {
+  visibility: hidden;
+}

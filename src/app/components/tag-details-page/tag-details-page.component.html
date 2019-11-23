@@ -1,1 +1,18 @@
-<p>tag-details-page works!</p>
+<div class="container results">
+  <h3 class="mb-2">
+    Projects with tag: <em>{{ tag }}</em>
+  </h3>
+
+  <hr />
+
+  <ng-container *ngFor="let project of projects">
+    <app-project-list-item [project]="project"></app-project-list-item>
+    <hr />
+  </ng-container>
+
+  <div class="d-md-none text-center">
+    <button (click)="scrollService.scrollTo('body')" class="btn">
+      <i>Back To Top</i>
+    </button>
+  </div>
+</div>
