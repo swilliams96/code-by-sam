@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div *ngIf="project; else noProject" class="project row">
-    <div class="project-image-container col-lg-4 offset-lg-1">
+    <div class="project-image-container col-md-4 col-lg-4 col-xl-3 offset-lg-1 offset-xl-2">
       <ng-container *ngIf="project.images && project.images.length > 0; else noImages">
         <img class="project-image" [src]="project.images[selectedImageIndex] || project.images[0]" draggable="false" />
         <div class="project-additional-images" *ngIf="project.images.length > 1">
@@ -19,7 +19,7 @@
       </ng-template>
     </div>
 
-    <div class="project-content col-lg-6 col-xl-5 text-left">
+    <div class="project-content col-md-8 col-lg-6 col-xl-5 text-left">
       <div class="project-body">
         <h2 class="project-title">
           {{ project.title }}
