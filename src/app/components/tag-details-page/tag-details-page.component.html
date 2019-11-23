@@ -10,6 +10,11 @@
     <hr />
   </ng-container>
 
+  <div *ngIf="!projects || projects.length === 0" class="text-center no-projects">
+    <p><em>No projects found...</em></p>
+    <a [routerLink]="'/'">Go back</a>
+  </div>
+
   <div class="d-md-none text-center">
     <button (click)="scrollService.scrollTo('body')" class="btn">
       <i>Back To Top</i>

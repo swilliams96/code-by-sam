@@ -22,6 +22,10 @@ describe('ProjectsSectionComponent', () => {
     fixture.detectChanges();
   });
 
+  beforeEach(() => {
+    window.projects = [];
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
