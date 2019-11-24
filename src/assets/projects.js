@@ -6,7 +6,7 @@ window.projects = [
       responsive single-page applications that can quickly and easily be updated by modifying JSON. The sites have support for tags, multiple
       images & videos, as well as a form that contacts the site-owner by email.`,
     date: '2019',
-    url: 'https://www.jamiejo.co.uk/',
+    url: 'https://www.jamiemay.co.uk/',
     tags: ['Angular 2', 'TypeScript', 'Node.js']
   },
   {
