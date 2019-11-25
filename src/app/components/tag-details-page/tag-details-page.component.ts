@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { Subscription } from 'rxjs';
-import { ProjectService } from 'src/app/services/project-service.service';
+import { ProjectService } from 'src/app/services/project.service';
 import { ScrollService } from 'src/app/services/scroll.service';
 
 @Component({

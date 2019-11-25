@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/project.model';
 import { Observable } from 'rxjs';
-import { ProjectService } from 'src/app/services/project-service.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-projects-section',
