@@ -1,12 +1,18 @@
 <section id="projects" class="text-center">
   <h1 class="section-heading">Projects</h1>
 
-  <hr/>
+  <hr />
 
   <div class="container">
-    <ng-container *ngFor="let project of projects">
-      <app-project-list-item [project]="project"></app-project-list-item>
-      <hr/>
+    <ng-container *ngIf="projects$ | async as projects; else noProjects">
+      <ng-container *ngFor="let project of projects">
+        <app-project-list-item [project]="project"></app-project-list-item>
+        <hr />
+      </ng-container>
     </ng-container>
   </div>
 </section>
+
+<ng-template #noProjects>
+  <app-loading-spinner [coreColour]="'#222'"></app-loading-spinner>
+</ng-template>

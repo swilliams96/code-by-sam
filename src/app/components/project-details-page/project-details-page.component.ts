@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { Subscription, interval, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ProjectService } from 'src/app/services/project-service.service';
 
 @Component({
   selector: 'app-project-details-page',
@@ -14,12 +15,12 @@ export class ProjectDetailsPageComponent implements OnInit, OnDestroy {
   selectedImageIndex = 0;
   private subscription: Subscription;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private projectService: ProjectService) {}
 
   ngOnInit() {
-    if (this.route.snapshot.paramMap.has('slug') && window.projects) {
+    if (this.route.snapshot.paramMap.has('slug') && this.projectService.projects) {
       const slug = this.route.snapshot.paramMap.get('slug').toLowerCase();
-      const project: Project = window.projects.find(x => slug === x.slug.toLowerCase());
+      const project: Project = this.projectService.projects.find(x => slug === x.slug.toLowerCase());
 
       if (project) {
         this.project = project;

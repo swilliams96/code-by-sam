@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/project.model';
+import { Observable } from 'rxjs';
+import { ProjectService } from 'src/app/services/project-service.service';
 
 @Component({
   selector: 'app-projects-section',
@@ -7,9 +9,11 @@ import { Project } from 'src/app/models/project.model';
   styleUrls: ['./projects-section.component.scss']
 })
 export class ProjectsSectionComponent implements OnInit {
-  projects: Project[] = window.projects || [];
+  projects$: Observable<Project[]>;
 
-  constructor() {}
+  constructor(private projectService: ProjectService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.projects$ = this.projectService.projects$;
+  }
 }
