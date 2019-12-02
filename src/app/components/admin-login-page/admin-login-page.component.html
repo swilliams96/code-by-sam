@@ -1,0 +1,17 @@
+<div class="login-panel card rounded shadow text-center p-4">
+  <ng-container *ngIf="!error; else errorText">
+    <p class="mb-2"><i>Please login to continue.</i></p>
+    <img
+      id="google-signin"
+      (click)="signInWithGoogle()"
+      class="mx-auto"
+      src="./assets/images/google-signin/btn_google_signin_light_normal_web.png"
+    />
+  </ng-container>
+
+  <ng-template #errorText>
+    <p class="mb-1 text-danger"><i>Something went wrong when trying to log in...</i></p>
+    <pre class="mb-3 text-danger small">{{ error }}</pre>
+    <a [routerLink]="['/']" class="btn btn-primary w-50 mx-auto">Go Back</a>
+  </ng-template>
+</div>

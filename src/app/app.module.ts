@@ -7,7 +7,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
+import { AuthGuard } from './guards/auth.guard';
 // Components
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -20,6 +22,9 @@ import { ProjectTagsComponent } from './components/project-tags/project-tags.com
 import { ProjectDetailsPageComponent } from './components/project-details-page/project-details-page.component';
 import { TagDetailsPageComponent } from './components/tag-details-page/tag-details-page.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { AdminLoginPageComponent } from './components/admin-login-page/admin-login-page.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { LayoutPageComponent } from './components/layout-page/layout-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,9 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     ProjectTagsComponent,
     TagDetailsPageComponent,
     LoadingSpinnerComponent,
+    AdminLoginPageComponent,
+    AdminPageComponent,
+    LayoutPageComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +50,10 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireAuthModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
