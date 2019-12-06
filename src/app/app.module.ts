@@ -12,19 +12,21 @@ import { environment } from '../environments/environment';
 import { AuthGuard } from './guards/auth.guard';
 // Components
 import { AppComponent } from './app.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { HeroSectionComponent } from './components/hero-section/hero-section.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { AboutSectionComponent } from './components/about-section/about-section.component';
-import { ProjectsSectionComponent } from './components/projects-section/projects-section.component';
-import { ProjectListItemComponent } from './components/project-list-item/project-list-item.component';
-import { ProjectTagsComponent } from './components/project-tags/project-tags.component';
-import { ProjectDetailsPageComponent } from './components/project-details-page/project-details-page.component';
-import { TagDetailsPageComponent } from './components/tag-details-page/tag-details-page.component';
-import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
-import { AdminLoginPageComponent } from './components/admin-login-page/admin-login-page.component';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
-import { LayoutPageComponent } from './components/layout-page/layout-page.component';
+import { HomePageComponent } from './components/portfolio/home-page/home-page.component';
+import { HeroSectionComponent } from './components/portfolio/hero-section/hero-section.component';
+import { NavbarComponent } from './components/portfolio/navbar/navbar.component';
+import { AboutSectionComponent } from './components/portfolio/about-section/about-section.component';
+import { ProjectsSectionComponent } from './components/portfolio/projects-section/projects-section.component';
+import { ProjectListItemComponent } from './components/portfolio/project-list-item/project-list-item.component';
+import { ProjectTagsComponent } from './components/portfolio/project-tags/project-tags.component';
+import { ProjectDetailsPageComponent } from './components/portfolio/project-details-page/project-details-page.component';
+import { TagDetailsPageComponent } from './components/portfolio/tag-details-page/tag-details-page.component';
+import { LoadingSpinnerComponent } from './components/portfolio/loading-spinner/loading-spinner.component';
+import { AdminLoginPageComponent } from './components/admin/admin-login-page/admin-login-page.component';
+import { AdminDashboardPageComponent } from './components/admin/admin-dashboard/admin-dashboard-page.component';
+import { LayoutPageComponent } from './components/portfolio/layout-page/layout-page.component';
+import { AdminLayoutPageComponent } from './components/admin/admin-layout-page/admin-layout-page.component';
+import { AdminProjectListComponent } from './components/admin/admin-project-list/admin-project-list.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +42,10 @@ import { LayoutPageComponent } from './components/layout-page/layout-page.compon
     TagDetailsPageComponent,
     LoadingSpinnerComponent,
     AdminLoginPageComponent,
-    AdminPageComponent,
-    LayoutPageComponent
+    AdminDashboardPageComponent,
+    LayoutPageComponent,
+    AdminLayoutPageComponent,
+    AdminProjectListComponent
   ],
   imports: [
     BrowserModule,

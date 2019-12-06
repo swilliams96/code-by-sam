@@ -1,0 +1,14 @@
+.faded {
+  opacity: 0.5;
+}
+
+.list-group-item {
+  .tooltip-text {
+    opacity: .1;
+    transition: .1s opacity;
+  }
+
+  &:hover .tooltip-text {
+    opacity: 1;
+  }
+}

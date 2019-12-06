@@ -1,30 +1,30 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProjectsSectionComponent } from './projects-section.component';
+import { TagDetailsPageComponent } from './tag-details-page.component';
 import { ProjectListItemComponent } from '../project-list-item/project-list-item.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ProjectTagsComponent } from '../project-tags/project-tags.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('ProjectsSectionComponent', () => {
-  let component: ProjectsSectionComponent;
-  let fixture: ComponentFixture<ProjectsSectionComponent>;
+describe('TagDetailsPageComponent', () => {
+  let component: TagDetailsPageComponent;
+  let fixture: ComponentFixture<TagDetailsPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProjectsSectionComponent, ProjectListItemComponent, ProjectTagsComponent],
+      declarations: [TagDetailsPageComponent, ProjectListItemComponent, ProjectTagsComponent],
       imports: [RouterTestingModule.withRoutes([])]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectsSectionComponent);
+    fixture = TestBed.createComponent(TagDetailsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  beforeEach(() => {
-    window.projects = [];
-  });
+  // beforeEach(() => {
+  //   window.projects = [];
+  // });
 
   it('should create', () => {
     expect(component).toBeTruthy();

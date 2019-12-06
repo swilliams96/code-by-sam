@@ -1,6 +1,6 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './components/portfolio/navbar/navbar.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {

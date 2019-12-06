@@ -22,7 +22,6 @@ describe('ProjectListItemComponent', () => {
   let testHostComponent: TestHostComponent;
   let testHostFixture: ComponentFixture<TestHostComponent>;
 
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent, ProjectListItemComponent, ProjectTagsComponent],

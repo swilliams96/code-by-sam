@@ -1,0 +1,11 @@
+@import './variables';
+
+$theme-colors: (
+  "primary": $primary-colour,
+  "success": #46ca1e,
+  "danger": #e44b25,
+  "info": #777777,
+  "admin-primary": $admin-primary-colour,
+  "admin-dark": $admin-dark-colour,
+  "admin-light": $admin-light-colour
+);

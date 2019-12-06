@@ -1,0 +1,31 @@
+@import '~src/sass/variables';
+
+$main-top-padding: 90px;
+$main-side-padding: 24px;
+$main-bottom-padding: 24px;
+
+#sidebar {
+  flex: 0 0 300px;
+  user-select: none;
+  background-color: lighten($color: $admin-dark-colour, $amount: 10%);
+}
+
+#main {
+  flex: 1 1 auto;
+  padding: $main-top-padding $main-side-padding $main-bottom-padding $main-side-padding;
+  max-width: 100vw;
+
+  @media (min-width: 768px) {
+    max-width: calc(100vw - 300px);
+  }
+
+  .content {
+    max-height: calc(100vh - #{$main-top-padding} - #{$main-bottom-padding});
+    overflow-y: auto;
+  }
+}
+
+.nav-link:hover {
+  background-color: #ffffff09;
+  color: $admin-light-colour;
+}

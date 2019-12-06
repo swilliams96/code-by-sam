@@ -1,0 +1,25 @@
+<div class="d-flex min-vh-100 text-admin-light">
+  <div id="sidebar" class="d-none d-md-block">
+    <div *ngIf="user$ | async as user" class="text-center p-4">
+      <img [src]="user.photoURL" class="rounded-circle w-25 my-2" draggable="false" />
+      <h3>{{ user.displayName }}</h3>
+    </div>
+
+    <nav class="nav flex-column text-center">
+      <a class="nav-link px-4 py-2 mb-1" [routerLink]="['/admin']" routerLinkActive="active" >Dashboard</a>
+      <a class="nav-link px-4 py-2 mb-1" [routerLink]="['/admin/projects/new']" routerLinkActive="active" >Create New</a>
+      <div class="px-4 py-2 mb-1">
+        <a class="btn btn-danger px-3 mt-3" (click)="signOut()">
+          <i class="far fa-power-off mr-1"></i>
+          Sign Out
+        </a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="main" class="bg-admin-dark text-admin-light">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

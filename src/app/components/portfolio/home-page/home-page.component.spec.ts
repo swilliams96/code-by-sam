@@ -32,9 +32,9 @@ describe('HomePageComponent', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(() => {
-    window.projects = [];
-  });
+  // beforeEach(() => {
+  //   window.projects = [];
+  // });
 
   it('should create', () => {
     expect(component).toBeTruthy();

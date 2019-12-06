@@ -1,0 +1,13 @@
+.btn-outline-primary {
+  color: $admin-primary-colour !important;
+
+  &:hover,
+  &:active,
+  &.active {
+    color: colour-on($admin-primary-colour) !important;
+  }
+}
+
+.card {
+  background-color: lighten($color: $admin-dark-colour, $amount: +5%);
+}

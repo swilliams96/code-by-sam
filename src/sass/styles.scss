@@ -2,6 +2,7 @@
 @import '~src/sass/fonts';
 @import '~src/sass/bootstrap';
 @import 'node_modules/bootstrap/scss/bootstrap';
+@import '~src/sass/functions';
 
 :root {
   --highlight-color-primary: $selection-colour;
@@ -33,12 +34,21 @@ nav *::selection,
 
 a {
   color: #00beff;
+  cursor: pointer;
 }
 
 a:hover,
 a:active {
   color: #0076a3;
 }
+
+/* CUSTOM CLASSES */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* HOME PAGE STYLING */
 
 section {
   padding-bottom: 80px;
@@ -57,6 +67,7 @@ section {
 }
 
 /* PROJECT DETAILS STYLING */
+
 .project {
   min-height: 250px;
 
@@ -112,3 +123,6 @@ section {
     }
   }
 }
+
+/* ADMIN */
+@import '~src/sass/admin';

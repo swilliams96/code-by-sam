@@ -1,0 +1,18 @@
+<a *ngIf="showNewProjectButton" class="new-project-button btn btn-outline-primary btn-sm float-right" [routerLink]="['/admin/projects/new']">
+  New
+  <i class="fad fa-plus-square ml-1"></i>
+</a>
+
+<h3 class="mb-3">Projects</h3>
+
+<div class="list-group">
+  <a *ngFor="let project of projects$ | async" class="list-group-item bg-transparent p-3 text-decoration-none text-admin-light" [routerLink]="['/admin/projects/' + project.slug]">
+    <div class="float-right font-italic small tooltip-text">Click to Edit <i class="fad fa-money-check-edit ml-1"></i></div>
+    <h3 class="small">{{ project.title }}</h3>
+    <p class="faded text-truncate d-block mb-0 small">{{ project.description }}</p>
+  </a>
+
+  <a *ngIf="showViewAllLink" class="list-group-item bg-transparent p-3 text-decoration-none text-admin-light text-center" [routerLink]="['/admin/projects']">
+    <em class="faded small">View all projects&hellip;</em>
+  </a>
+</div>
