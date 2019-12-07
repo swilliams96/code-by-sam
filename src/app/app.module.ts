@@ -27,6 +27,8 @@ import { AdminDashboardPageComponent } from './components/admin/admin-dashboard/
 import { LayoutPageComponent } from './components/portfolio/layout-page/layout-page.component';
 import { AdminLayoutPageComponent } from './components/admin/admin-layout-page/admin-layout-page.component';
 import { AdminProjectListComponent } from './components/admin/admin-project-list/admin-project-list.component';
+import { AdminNewProjectPageComponent } from './components/admin/admin-new-project-page/admin-new-project-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,13 +47,15 @@ import { AdminProjectListComponent } from './components/admin/admin-project-list
     AdminDashboardPageComponent,
     LayoutPageComponent,
     AdminLayoutPageComponent,
-    AdminProjectListComponent
+    AdminProjectListComponent,
+    AdminNewProjectPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     NgbModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,

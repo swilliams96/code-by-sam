@@ -10,7 +10,7 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./admin-project-list.component.scss']
 })
 export class AdminProjectListComponent implements OnInit {
-  @Input() limit = 2;
+  @Input() limit = 0;
   @Input() showNewProjectButton = true;
   projects$: Observable<Project[]>;
   showViewAllLink = true;

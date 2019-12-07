@@ -1,0 +1,41 @@
+<h2 class="mb-2">New Project</h2>
+
+<form [formGroup]="projectForm" (ngSubmit)="submit()">
+  <div class="container-fluid">
+    <div class="form-group row">
+      <label for="title" class="col-sm-2 col-md-3 col-lg-2 col-form-label">Title:</label>
+      <div class="col-sm-10 col-md-9 col-lg-10">
+        <input class="form-control" id="title" formControlName="title" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="slug" class="col-sm-2 col-md-3 col-lg-2 col-form-label">Slug:</label>
+      <div class="col-sm-10 col-md-9 col-lg-10 ">
+        <input
+          class="form-control"
+          id="slug"
+          formControlName="slug"
+          (change)="recalculateSlugValue($event)"
+          #slugInput
+        />
+      </div>
+      <div class="col-sm-10 col-md-9 col-lg-10 offset-sm-2 offset-md-3 offset-lg-2">
+        <small class="font-italic"
+          ><span class="faded">{{ host }}/projects/</span>{{ slugInput.value }}</small
+        >
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description" class="col-sm-2 col-md-3 col-lg-2 col-form-label">Description:</label>
+      <div class="col-sm-10 col-md-9 col-lg-10 ">
+        <textarea class="form-control" id="description" formControlName="description" rows="4"></textarea>
+      </div>
+    </div>
+
+    <div class="col-sm-10 col-md-9 col-lg-10 offset-sm-2 offset-md-3 offset-lg-2 mb-5">
+      <button class="btn btn-primary d-block mx-auto px-5">Save</button>
+    </div>
+  </div>
+</form>

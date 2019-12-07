@@ -1,0 +1,16 @@
+@import '~src/sass/variables';
+
+form {
+  max-width: 700px;
+
+  label {
+    font-weight: bold;
+  }
+
+  input,
+  textarea {
+    color: $admin-light-colour;
+    background-color: lighten($color: $admin-dark-colour, $amount: +5%);
+    border: none;
+  }
+}

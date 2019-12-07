@@ -8,6 +8,7 @@ import { TagDetailsPageComponent } from './components/portfolio/tag-details-page
 import { AdminLayoutPageComponent } from './components/admin/admin-layout-page/admin-layout-page.component';
 import { AdminLoginPageComponent } from './components/admin/admin-login-page/admin-login-page.component';
 import { AdminDashboardPageComponent } from './components/admin/admin-dashboard/admin-dashboard-page.component';
+import { AdminNewProjectPageComponent } from './components/admin/admin-new-project-page/admin-new-project-page.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: AdminDashboardPageComponent },
+      { path: 'projects/new', component: AdminNewProjectPageComponent },
       { path: '**', redirectTo: '/admin', pathMatch: 'full' }
     ]
   },
