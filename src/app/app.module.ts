@@ -29,6 +29,7 @@ import { AdminLayoutPageComponent } from './components/admin/admin-layout-page/a
 import { AdminProjectListComponent } from './components/admin/admin-project-list/admin-project-list.component';
 import { AdminNewProjectPageComponent } from './components/admin/admin-new-project-page/admin-new-project-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminLoadingSpinnerComponent } from './components/admin/admin-loading-spinner/admin-loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LayoutPageComponent,
     AdminLayoutPageComponent,
     AdminProjectListComponent,
-    AdminNewProjectPageComponent
+    AdminNewProjectPageComponent,
+    AdminLoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,23 @@
-<h2 class="mb-2">New Project</h2>
+<h2 class="mb-3">New Project</h2>
 
-<form [formGroup]="projectForm" (ngSubmit)="submit()">
+<form [formGroup]="projectForm" (ngSubmit)="submit()" autocomplete="off" [ngClass]="{ submitted: submitButtonClicked }">
   <div class="container-fluid">
     <div class="form-group row">
-      <label for="title" class="col-sm-2 col-md-3 col-lg-2 col-form-label">Title:</label>
-      <div class="col-sm-10 col-md-9 col-lg-10">
+      <label for="title" class="col-sm-3 col-md-4 col-lg-2 col-form-label">
+        Title:
+        <span class="font-weight-normal text-danger">*</span>
+      </label>
+      <div class="col-sm-9 col-md-8 col-lg-10">
         <input class="form-control" id="title" formControlName="title" />
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="slug" class="col-sm-2 col-md-3 col-lg-2 col-form-label">Slug:</label>
-      <div class="col-sm-10 col-md-9 col-lg-10 ">
+      <label for="slug" class="col-sm-3 col-md-4 col-lg-2 col-form-label">
+        Slug:
+        <span class="font-weight-normal text-danger">*</span>
+      </label>
+      <div class="col-sm-9 col-md-8 col-lg-10 ">
         <input
           class="form-control"
           id="slug"
@@ -20,22 +26,92 @@
           #slugInput
         />
       </div>
-      <div class="col-sm-10 col-md-9 col-lg-10 offset-sm-2 offset-md-3 offset-lg-2">
-        <small class="font-italic"
-          ><span class="faded">{{ host }}/projects/</span>{{ slugInput.value }}</small
-        >
+      <div class="col-sm-9 col-md-8 col-lg-10 offset-sm-3 offset-md-4 offset-lg-2">
+        <small class="font-italic">
+          <span class="faded">{{ host }}/projects/</span>{{ slugInput.value }}
+        </small>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="description" class="col-sm-2 col-md-3 col-lg-2 col-form-label">Description:</label>
-      <div class="col-sm-10 col-md-9 col-lg-10 ">
+      <label for="description" class="col-sm-3 col-md-4 col-lg-2 col-form-label">
+        Description:
+        <span class="font-weight-normal text-danger">*</span>
+      </label>
+      <div class="col-sm-9 col-md-8 col-lg-10 ">
         <textarea class="form-control" id="description" formControlName="description" rows="4"></textarea>
       </div>
     </div>
 
-    <div class="col-sm-10 col-md-9 col-lg-10 offset-sm-2 offset-md-3 offset-lg-2 mb-5">
-      <button class="btn btn-primary d-block mx-auto px-5">Save</button>
+    <div class="form-group row">
+      <label for="url" class="col-sm-3 col-md-4 col-lg-2 col-form-label">
+        Project URL:
+      </label>
+      <div class="col-sm-9 col-md-8 col-lg-10">
+        <input class="form-control" id="url" formControlName="url" />
+      </div>
+      <div class="col-sm-9 col-md-8 col-lg-10 offset-sm-3 offset-md-4 offset-lg-2">
+        <small class="font-italic faded">A link to the project's website, if applicable.</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="date" class="col-sm-3 col-md-4 col-lg-2 col-form-label">
+        Date:
+      </label>
+      <div class="col-sm-9 col-md-8 col-lg-10">
+        <input class="form-control" id="date" formControlName="date" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="tags" class="col-sm-3 col-md-4 col-lg-2 col-form-label">
+        Tags:
+      </label>
+      <div class="col-sm-9 col-md-8 col-lg-10">
+        <input class="form-control" id="tags" formControlName="tags" />
+      </div>
+      <div class="col-sm-9 col-md-8 col-lg-10 offset-sm-3 offset-md-4 offset-lg-2">
+        <small class="font-italic faded">A comma-separated list of tags for the project.</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-md-4 col-lg-2 col-form-label">
+        Images:
+      </label>
+      <div class="col-sm-9 col-md-8 col-lg-10">
+        <div class="image-selector">
+          <!-- Images -->
+          <div *ngFor="let image of images; let i = index" class="position-relative m-2">
+            <img [src]="image.data" class="h-100 rounded" draggable="false" />
+            <div class="remove-image-button" (click)="removeImage(i)">
+              <i class="fas fa-times-circle"></i>
+            </div>
+          </div>
+
+          <!-- New Image -->
+          <a class="add-new-image d-inline-block rounded m-2" (click)="newImageInput.click()">
+            <i class="fas fa-plus"></i>
+            <!-- Hidden File Input -->
+            <input #newImageInput type="file" multiple class="d-none" (change)="imagesChosen()" />
+          </a>
+
+          <!-- Padding Element -->
+          <div class="flex-grow-1 flex-shrink-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-9 col-md-8 col-lg-10 offset-sm-2 offset-md-3 offset-lg-2 mb-5">
+      <button class="btn btn-primary d-block mx-auto px-5" (click)="submit()" [disabled]="submitted">
+        <ng-container *ngIf="!submitted">
+          Save
+        </ng-container>
+        <ng-container *ngIf="submitted">
+          <app-admin-loading-spinner colour="light" size="small"></app-admin-loading-spinner>
+        </ng-container>
+      </button>
     </div>
   </div>
 </form>

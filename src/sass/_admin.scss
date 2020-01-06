@@ -1,3 +1,28 @@
+form {
+  .form-control,
+  .form-control:focus {
+    color: $admin-light-colour;
+    background-color: lighten($color: $admin-dark-colour, $amount: +5%);
+    border: none;
+
+    &.ng-dirty.ng-invalid {
+      border: 1px solid darken($color: $admin-danger-colour, $amount: +10%);
+    }
+
+    &:disabled {
+      background-color: lighten($color: $admin-dark-colour, $amount: +2%);
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+  }
+}
+
 .faded {
   opacity: 0.5;
 }

@@ -1,37 +1,44 @@
-import { Component, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-new-project-page',
   templateUrl: './admin-new-project-page.component.html',
   styleUrls: ['./admin-new-project-page.component.scss']
 })
-export class AdminNewProjectPageComponent implements OnInit, OnDestroy {
+export class AdminNewProjectPageComponent implements OnInit {
+  readonly host = window.location.host;
+  @ViewChild('newImageInput', { static: false }) newImageInput: ElementRef<HTMLInputElement>;
   projectForm: FormGroup;
-  host: string;
-  private _slugValueChangeSubscription: Subscription;
+  images: Image[] = [];
+  /** Whether the submit button has been clicked yet. */
+  submitButtonClicked = false;
+  /** Whether the form has been submitted successfully  (with valid data). */
+  submitted = false;
 
   constructor() {}
 
   ngOnInit() {
     this._initialiseProjectForm();
-    this.host = window.location.host;
   }
 
-  ngOnDestroy() {
-    if (this._slugValueChangeSubscription) {
-      this._slugValueChangeSubscription.unsubscribe();
-    }
-  }
-
+  /** The handler for the submission of the form. */
   submit() {
-    // do stuff
+    this.submitButtonClicked = true;
+
+    if (!this.projectForm.valid) {
+      return;
+    }
+
+    this.submitted = true;
+
+    console.log('SUBMITTING...');
   }
 
+  /** Update the slug value with the new field value on change. */
   recalculateSlugValue(event: Event) {
     const newValue = (event.target as HTMLInputElement).value;
-    console.log(newValue);
+
     this.projectForm.setValue({
       ...this.projectForm.value,
       slug: newValue
@@ -41,6 +48,43 @@ export class AdminNewProjectPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  /** Handler for when images are chosen by the user. */
+  imagesChosen() {
+    if (!window.File || !window.FileList || !window.FileReader) {
+      console.error('Your browser does not support File API - please update or switch to a more modern browser...');
+    }
+
+    const files = this.newImageInput.nativeElement.files;
+    // tslint:disable-next-line: prefer-for-of : FileList is not iterable
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      if (!file.type.match('image')) {
+        continue;
+      }
+
+      const fileReader = new FileReader();
+      fileReader.addEventListener('load', event => {
+        this.images.push({
+          exists: false,
+          data: event.target.result.toString()
+        });
+      });
+      fileReader.readAsDataURL(file);
+    }
+  }
+
+  /** Remove image from the list. */
+  removeImage(index: number) {
+    if (this.images.length <= index) {
+      console.error(`Could not remove image at ID ${index} as there are not that many images.`);
+      return;
+    }
+
+    this.images.splice(index, 1);
+  }
+
+  /** Set up the project form group. */
   private _initialiseProjectForm() {
     this.projectForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
@@ -48,17 +92,14 @@ export class AdminNewProjectPageComponent implements OnInit, OnDestroy {
       slug: new FormControl('', [Validators.required]),
       url: new FormControl(''),
       date: new FormControl(''),
-      // images?: new FormGroup({}),
-      tags: new FormControl('')
+      tags: new FormControl('', [Validators.pattern(/(.+?)(?:,\s*|$)/)])
     });
-
-    if (this._slugValueChangeSubscription) {
-      this._slugValueChangeSubscription.unsubscribe();
-    }
-
-    // this._slugValueChangeSubscription = this.projectForm.valueChanges.subscribe(value => {
-    //   console.log(value.slug);
-
-    // });
   }
+}
+
+/** The model for adding new project images. */
+interface Image {
+  exists: boolean;
+  data?: string;
+  url?: string;
 }

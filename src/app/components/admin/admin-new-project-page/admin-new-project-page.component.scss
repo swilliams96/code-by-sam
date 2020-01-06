@@ -1,16 +1,48 @@
 @import '~src/sass/variables';
 
-form {
-  max-width: 700px;
+$image-list-height: 150px;
+$image-list-padding: 8px;
 
-  label {
-    font-weight: bold;
+form {
+  max-width: 800px;
+
+  &.submitted .ng-invalid {
+    border: 1px solid $admin-danger-colour;
+  }
+}
+
+.image-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: lighten($color: $admin-dark-colour, $amount: +5%);
+
+  > * {
+    flex: 0 0 auto;
+    height: $image-list-height;
   }
 
-  input,
-  textarea {
+  .add-new-image {
+    width: $image-list-height;
+    height: $image-list-height;
+    line-height: $image-list-height;
+    font-size: 40px;
+    text-align: center;
     color: $admin-light-colour;
-    background-color: lighten($color: $admin-dark-colour, $amount: +5%);
-    border: none;
+    border: 1px solid $admin-light-colour;
+
+    &:hover {
+      background-color: adjust-color($color: $admin-light-colour, $alpha: -0.95);
+    }
+  }
+
+  .remove-image-button {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+    color: #ffffff;
+    text-shadow: 0px 1px 4px #000000cc;
+    font-size: 20px;
   }
 }
