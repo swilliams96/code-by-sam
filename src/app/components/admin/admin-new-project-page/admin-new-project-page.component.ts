@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProjectService } from 'src/app/services/project.service';
+import { Project } from 'src/app/models/project.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-new-project-page',
@@ -16,23 +19,10 @@ export class AdminNewProjectPageComponent implements OnInit {
   /** Whether the form has been submitted successfully  (with valid data). */
   submitted = false;
 
-  constructor() {}
+  constructor(private projectService: ProjectService, private router: Router) {}
 
   ngOnInit() {
     this._initialiseProjectForm();
-  }
-
-  /** The handler for the submission of the form. */
-  submit() {
-    this.submitButtonClicked = true;
-
-    if (!this.projectForm.valid) {
-      return;
-    }
-
-    this.submitted = true;
-
-    console.log('SUBMITTING...');
   }
 
   /** Update the slug value with the new field value on change. */
@@ -67,7 +57,7 @@ export class AdminNewProjectPageComponent implements OnInit {
       fileReader.addEventListener('load', event => {
         this.images.push({
           exists: false,
-          data: event.target.result.toString()
+          data: (event.target as any).result.toString()
         });
       });
       fileReader.readAsDataURL(file);
@@ -84,6 +74,37 @@ export class AdminNewProjectPageComponent implements OnInit {
     this.images.splice(index, 1);
   }
 
+  /** The handler for the submission of the form. */
+  submit() {
+    this.submitButtonClicked = true;
+
+    console.log('saving project', this.projectForm.value, this.images);
+
+    if (!this.projectForm.valid) {
+      return;
+    }
+
+    const existingProject = this.projectService.projects.find(x => x.slug === this.projectForm.get('slug').value);
+    if (!!existingProject) {
+      this.projectForm.get('slug').setErrors({
+        'not-unique': 'This slug is already being used by another project, please choose something else.'
+      });
+      return;
+    }
+
+    this.submitted = true;
+    const project: Project = this.projectForm.value;
+
+    this.projectService.saveProject(project, this.images).then(
+      () => {
+      console.log('Successfully saved project!', project.slug);
+      this.router.navigateByUrl('/admin/projects');
+    }).catch(err => {
+      this.submitted = false;
+      throw err;
+    });
+  }
+
   /** Set up the project form group. */
   private _initialiseProjectForm() {
     this.projectForm = new FormGroup({
@@ -95,11 +116,4 @@ export class AdminNewProjectPageComponent implements OnInit {
       tags: new FormControl('', [Validators.pattern(/(.+?)(?:,\s*|$)/)])
     });
   }
-}
-
-/** The model for adding new project images. */
-interface Image {
-  exists: boolean;
-  data?: string;
-  url?: string;
 }

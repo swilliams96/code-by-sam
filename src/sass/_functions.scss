@@ -1,5 +1,5 @@
 @import '~src/sass/variables';
-@import 'node_modules/bootstrap/scss/functions';
+@import '~node_modules/bootstrap/scss/functions';
 
 @function colour-on($background-colour, $admin: true) {
   $dark-colour: if($admin, $admin-dark-colour, theme-color("dark"));

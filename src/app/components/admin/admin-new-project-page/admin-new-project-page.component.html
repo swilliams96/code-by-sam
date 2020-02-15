@@ -1,6 +1,6 @@
 <h2 class="mb-3">New Project</h2>
 
-<form [formGroup]="projectForm" (ngSubmit)="submit()" autocomplete="off" [ngClass]="{ submitted: submitButtonClicked }">
+<form [formGroup]="projectForm" autocomplete="off" [ngClass]="{ submitted: submitButtonClicked }">
   <div class="container-fluid">
     <div class="form-group row">
       <label for="title" class="col-sm-3 col-md-4 col-lg-2 col-form-label">
@@ -27,9 +27,15 @@
         />
       </div>
       <div class="col-sm-9 col-md-8 col-lg-10 offset-sm-3 offset-md-4 offset-lg-2">
-        <small class="font-italic">
+        <div class="small font-italic">
           <span class="faded">{{ host }}/projects/</span>{{ slugInput.value }}
-        </small>
+        </div>
+        <div
+          *ngIf="projectForm.controls['slug'].errors && projectForm.controls['slug'].errors['not-unique']"
+          class="small text-danger my-1"
+        >
+          {{ projectForm.controls['slug'].errors['not-unique'] }}
+        </div>
       </div>
     </div>
 
