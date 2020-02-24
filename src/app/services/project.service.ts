@@ -27,9 +27,10 @@ export class ProjectService {
 
   /** Saves a project as a document in Firestore. */
   async saveProject(project: Project, images: Image[]): Promise<void> {
-    const newImageUrls = await this._saveProjectImages(project.slug, images);
-    project.images = newImageUrls;
+    // First upload all the images for the project.
+    project.images = await this._saveProjectImages(project.slug, images);
 
+    // Then save the project as a document in Firestore.
     await this.firestore
       .collection(this._firestorePath)
       .doc(project.slug)
@@ -39,7 +40,19 @@ export class ProjectService {
         console.error(`Failed to save project ${project.slug} to Firestore`, err, project);
         throw err;
       });
+  }
 
+  /** Deletes a project from the Firestore. */
+  async deleteProject(project: Project) {
+    await this.firestore
+      .collection(this._firestorePath)
+      .doc(project.slug)
+      .delete();
+
+    const storageRef = this.storage.ref(`${this._storagePath}/${project.slug}`);
+    for (const image of project.images) {
+      await storageRef.child(image).delete();
+    }
   }
 
   /**

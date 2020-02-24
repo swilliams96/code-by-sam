@@ -1,7 +1,10 @@
 @import '~src/sass/variables';
 
-$main-top-padding: 90px;
-$main-side-padding: 24px;
+$header-height: 50px;
+$header-margin-bottom: 16px;
+
+$main-padding-y: 24px;
+$main-padding-x: 24px;
 $main-bottom-padding: 24px;
 
 #sidebar {
@@ -17,10 +20,16 @@ $main-bottom-padding: 24px;
 
   @media (min-width: 768px) {
     max-width: calc(100vw - 300px);
-    padding: $main-top-padding $main-side-padding $main-bottom-padding $main-side-padding;
+    padding: $main-padding-y $main-padding-x $main-padding-y $main-padding-x;
+
+    .header {
+      height: $header-height;
+      margin-bottom: $header-margin-bottom;
+      overflow: hidden;
+    }
 
     .content {
-      max-height: calc(100vh - #{$main-top-padding} - #{$main-bottom-padding});
+      max-height: calc(100vh - #{2 * $main-padding-y} - #{$header-height} - #{$header-margin-bottom});
       overflow-y: auto;
     }
   }

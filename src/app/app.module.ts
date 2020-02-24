@@ -30,6 +30,8 @@ import { AdminProjectListComponent } from './components/admin/admin-project-list
 import { AdminNewProjectPageComponent } from './components/admin/admin-new-project-page/admin-new-project-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminLoadingSpinnerComponent } from './components/admin/admin-loading-spinner/admin-loading-spinner.component';
+import { AdminProjectsPageComponent } from './components/admin/admin-projects-page/admin-projects-page.component';
+import { AdminProjectListItemComponent } from './components/admin/admin-project-list-item/admin-project-list-item.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AdminLoadingSpinnerComponent } from './components/admin/admin-loading-s
     AdminLayoutPageComponent,
     AdminProjectListComponent,
     AdminNewProjectPageComponent,
-    AdminLoadingSpinnerComponent
+    AdminLoadingSpinnerComponent,
+    AdminProjectsPageComponent,
+    AdminProjectListItemComponent
   ],
   imports: [
     BrowserModule,

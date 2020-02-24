@@ -9,6 +9,7 @@ import { AdminLayoutPageComponent } from './components/admin/admin-layout-page/a
 import { AdminLoginPageComponent } from './components/admin/admin-login-page/admin-login-page.component';
 import { AdminDashboardPageComponent } from './components/admin/admin-dashboard/admin-dashboard-page.component';
 import { AdminNewProjectPageComponent } from './components/admin/admin-new-project-page/admin-new-project-page.component';
+import { AdminProjectsPageComponent } from './components/admin/admin-projects-page/admin-projects-page.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: AdminDashboardPageComponent },
-      { path: 'projects/new', component: AdminNewProjectPageComponent },
+      {
+        path: 'projects', children: [
+          { path: 'new', component: AdminNewProjectPageComponent },
+          // { path: ':id', component: AdminEditProjectPageComponent },
+          { path: '', component: AdminProjectsPageComponent },
+          { path: '**', redirectTo: '/admin/projects', pathMatch: 'full' }
+        ]
+      },
       { path: '**', redirectTo: '/admin', pathMatch: 'full' }
     ]
   },

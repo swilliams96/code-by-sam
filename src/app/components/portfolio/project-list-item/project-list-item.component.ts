@@ -15,9 +15,10 @@ export class ProjectListItemComponent implements OnInit {
   constructor(private storage: AngularFireStorage) {}
 
   ngOnInit() {
-    this.image$ = this.project && this.project.images && this.project.images.length > 0
-      ? from(this.storage.ref(`projects/${this.project.slug}/${this.project.images[0]}`).getDownloadURL())
-      : of('');
+    this.image$ =
+      this.project && this.project.images && this.project.images.length > 0
+        ? from(this.storage.ref(`projects/${this.project.slug}/${this.project.images[0]}`).getDownloadURL())
+        : of('');
   }
 
   get shortDescription(): string | undefined {

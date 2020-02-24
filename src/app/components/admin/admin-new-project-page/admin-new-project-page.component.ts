@@ -78,8 +78,6 @@ export class AdminNewProjectPageComponent implements OnInit {
   submit() {
     this.submitButtonClicked = true;
 
-    console.log('saving project', this.projectForm.value, this.images);
-
     if (!this.projectForm.valid) {
       return;
     }
@@ -93,16 +91,24 @@ export class AdminNewProjectPageComponent implements OnInit {
     }
 
     this.submitted = true;
-    const project: Project = this.projectForm.value;
 
-    this.projectService.saveProject(project, this.images).then(
-      () => {
-      console.log('Successfully saved project!', project.slug);
-      this.router.navigateByUrl('/admin/projects');
-    }).catch(err => {
-      this.submitted = false;
-      throw err;
-    });
+    const tagsInput: string = this.projectForm.get('tagsInput').value;
+    const tags: string[] = tagsInput.split(',').map(x => x.trim());
+    console.log('saving project with tags:', tags, 'from tagsInput:', tagsInput);
+
+    const project: ProjectInput = { ...this.projectForm.value, tags };
+    delete project.tagsInput;
+
+    this.projectService
+      .saveProject(project, this.images)
+      .then(() => {
+        console.log('Successfully saved project!', project.slug);
+        this.router.navigateByUrl('/admin/projects');
+      })
+      .catch(err => {
+        this.submitted = false;
+        throw err;
+      });
   }
 
   /** Set up the project form group. */
@@ -113,7 +119,11 @@ export class AdminNewProjectPageComponent implements OnInit {
       slug: new FormControl('', [Validators.required]),
       url: new FormControl(''),
       date: new FormControl(''),
-      tags: new FormControl('', [Validators.pattern(/(.+?)(?:,\s*|$)/)])
+      tagsInput: new FormControl('', [Validators.pattern(/(.+?)(?:,\s*|$)/)])
     });
   }
+}
+
+interface ProjectInput extends Project {
+  tagsInput: string;
 }

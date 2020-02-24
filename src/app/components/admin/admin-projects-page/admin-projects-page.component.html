@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-between align-items-center mb-3 mr-3">
+    <h3>Projects</h3>
+
+    <div>
+      <a class="btn btn-admin-primary float-right d-inline-block" [routerLink]="['/admin/projects/new']">
+        New Project<i class="fas fa-plus-square ml-2"></i>
+      </a>
+    </div>
+  </div>
+
+  <app-admin-project-list-item *ngFor="let project of projects$ | async" [project]="project"></app-admin-project-list-item>
+</div>
