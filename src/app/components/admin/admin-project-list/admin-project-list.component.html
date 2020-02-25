@@ -3,7 +3,9 @@
   <i class="fad fa-plus-square ml-1"></i>
 </a>
 
-<h3 class="mb-3">Projects</h3>
+<h3 class="mb-3">
+  <span [routerLink]="['projects']">Projects</span>
+</h3>
 
 <div class="list-group">
   <a *ngFor="let project of projects$ | async" class="list-group-item bg-transparent p-3 text-decoration-none text-admin-light" [routerLink]="['/admin/projects/edit', project.slug]">
