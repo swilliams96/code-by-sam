@@ -1,28 +1,44 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProjectService } from 'src/app/services/project.service';
+import { ProjectImage } from 'src/app/models/project-image.model';
 import { Project } from 'src/app/models/project.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
+interface ProjectInput extends Project {
+  tagsInput: string;
+}
 
 @Component({
-  selector: 'app-admin-new-project-page',
-  templateUrl: './admin-new-project-page.component.html',
-  styleUrls: ['./admin-new-project-page.component.scss']
+  selector: 'app-admin-edit-project-page',
+  templateUrl: './admin-edit-project-page.component.html',
+  styleUrls: ['./admin-edit-project-page.component.scss']
 })
-export class AdminNewProjectPageComponent implements OnInit {
+export class AdminEditProjectPageComponent implements OnInit {
   readonly host = window.location.host;
   @ViewChild('newImageInput', { static: false }) newImageInput: ElementRef<HTMLInputElement>;
   projectForm: FormGroup;
-  images: Image[] = [];
+  images: ProjectImage[] = [];
   /** Whether the submit button has been clicked yet. */
   submitButtonClicked = false;
   /** Whether the form has been submitted successfully  (with valid data). */
   submitted = false;
 
-  constructor(private projectService: ProjectService, private router: Router) {}
+  constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this._initialiseProjectForm();
+    console.log(this.route.snapshot.params);
+    if (this.route.snapshot.params.slug) {
+      const project = this.projectService.projects.find(x => x.slug === this.route.snapshot.params.slug);
+      if (project) {
+        this._initialiseProjectForm(project);
+        this._setupExistingImages(project);
+      } else {
+        this.router.navigateByUrl('/admin/projects');
+      }
+    } else {
+      this._initialiseProjectForm();
+    }
   }
 
   /** Update the slug value with the new field value on change. */
@@ -39,7 +55,7 @@ export class AdminNewProjectPageComponent implements OnInit {
   }
 
   /** Handler for when images are chosen by the user. */
-  imagesChosen() {
+  newImagesChosenHandler() {
     if (!window.File || !window.FileList || !window.FileReader) {
       console.error('Your browser does not support File API - please update or switch to a more modern browser...');
     }
@@ -82,19 +98,20 @@ export class AdminNewProjectPageComponent implements OnInit {
       return;
     }
 
-    const existingProject = this.projectService.projects.find(x => x.slug === this.projectForm.get('slug').value);
-    if (!!existingProject) {
-      this.projectForm.get('slug').setErrors({
-        'not-unique': 'This slug is already being used by another project, please choose something else.'
-      });
-      return;
+    if (this.projectForm.get('slug').value !== this.route.snapshot.params.slug) {
+      const existingProject = this.projectService.projects.find(x => x.slug === this.projectForm.get('slug').value);
+      if (!!existingProject) {
+        this.projectForm.get('slug').setErrors({
+          'not-unique': 'This slug is already being used by another project, please choose something else.'
+        });
+        return;
+      }
     }
 
     this.submitted = true;
 
     const tagsInput: string = this.projectForm.get('tagsInput').value;
     const tags: string[] = tagsInput.split(',').map(x => x.trim());
-    console.log('saving project with tags:', tags, 'from tagsInput:', tagsInput);
 
     const project: ProjectInput = { ...this.projectForm.value, tags };
     delete project.tagsInput;
@@ -112,18 +129,31 @@ export class AdminNewProjectPageComponent implements OnInit {
   }
 
   /** Set up the project form group. */
-  private _initialiseProjectForm() {
+  private _initialiseProjectForm(project?: Project) {
     this.projectForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      slug: new FormControl('', [Validators.required]),
-      url: new FormControl(''),
-      date: new FormControl(''),
-      tagsInput: new FormControl('', [Validators.pattern(/(.+?)(?:,\s*|$)/)])
+      title: new FormControl(project ? project.title : '', [Validators.required]),
+      description: new FormControl(project ? project.description : '', [Validators.required]),
+      slug: new FormControl(project ? project.slug : '', [Validators.required]),
+      url: new FormControl(project ? project.url : ''),
+      date: new FormControl(project ? project.date : ''),
+      tagsInput: new FormControl(project && project.tags ? project.tags.join(', ') : '', [Validators.pattern(/(.+?)(?:,\s*|$)/)])
     });
   }
-}
 
-interface ProjectInput extends Project {
-  tagsInput: string;
+  private _setupExistingImages(project: Project) {
+    if (!project || !project.images) {
+      console.warn('No project images supplied...', project);
+      return;
+    }
+
+    this.images = [];
+
+    project.images.forEach(async imageName => {
+      this.images.push({
+        exists: true,
+        name: imageName,
+        downloadUrl: await this.projectService.getProjectImageStorageUrl(project.slug, imageName)
+      });
+    });
+  }
 }

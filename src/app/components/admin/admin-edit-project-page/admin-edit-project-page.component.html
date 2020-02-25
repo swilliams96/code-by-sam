@@ -1,6 +1,6 @@
-<h2 class="mb-3">New Project</h2>
+<h2 class="mb-3">{{ this.route.snapshot.params.slug ? 'Edit' : 'New' }} Project</h2>
 
-<form [formGroup]="projectForm" autocomplete="off" [ngClass]="{ submitted: submitButtonClicked }">
+<form *ngIf="projectForm" [formGroup]="projectForm" autocomplete="off" [ngClass]="{ submitted: submitButtonClicked }">
   <div class="container-fluid">
     <div class="form-group row">
       <label for="title" class="col-sm-3 col-md-4 col-lg-2 col-form-label">
@@ -8,7 +8,7 @@
         <span class="font-weight-normal text-danger">*</span>
       </label>
       <div class="col-sm-9 col-md-8 col-lg-10">
-        <input class="form-control" id="title" formControlName="title" [ngClass]="{ 'disabled': submitted }" />
+        <input class="form-control" id="title" formControlName="title" [disabled]="submitted" />
       </div>
     </div>
 
@@ -24,7 +24,7 @@
           id="slug"
           formControlName="slug"
           (change)="recalculateSlugValue($event)"
-          [ngClass]="{ 'disabled': submitted }"
+          [disabled]="submitted"
         />
       </div>
       <div class="col-sm-9 col-md-8 col-lg-10 offset-sm-3 offset-md-4 offset-lg-2">
@@ -46,7 +46,7 @@
         <span class="font-weight-normal text-danger">*</span>
       </label>
       <div class="col-sm-9 col-md-8 col-lg-10 ">
-        <textarea class="form-control" id="description" formControlName="description" rows="4"></textarea>
+        <textarea class="form-control" id="description" formControlName="description" rows="7"></textarea>
       </div>
     </div>
 
@@ -55,7 +55,7 @@
         Project URL:
       </label>
       <div class="col-sm-9 col-md-8 col-lg-10">
-        <input class="form-control" id="url" formControlName="url" [ngClass]="{ 'disabled': submitted }" />
+        <input class="form-control" id="url" formControlName="url" [disabled]="submitted" />
       </div>
       <div class="col-sm-9 col-md-8 col-lg-10 offset-sm-3 offset-md-4 offset-lg-2">
         <small class="font-italic faded">A link to the project's website, if applicable.</small>
@@ -67,7 +67,7 @@
         Date:
       </label>
       <div class="col-sm-9 col-md-8 col-lg-10">
-        <input class="form-control" id="date" formControlName="date" [ngClass]="{ 'disabled': submitted }" />
+        <input class="form-control" id="date" formControlName="date" [disabled]="submitted" />
       </div>
     </div>
 
@@ -76,7 +76,7 @@
         Tags:
       </label>
       <div class="col-sm-9 col-md-8 col-lg-10">
-        <input class="form-control" id="tags" formControlName="tagsInput" [ngClass]="{ 'disabled': submitted }" />
+        <input class="form-control" id="tags" formControlName="tagsInput" [disabled]="submitted" />
       </div>
       <div class="col-sm-9 col-md-8 col-lg-10 offset-sm-3 offset-md-4 offset-lg-2">
         <small class="font-italic faded">A comma-separated list of tags for the project.</small>
@@ -91,7 +91,7 @@
         <div class="image-selector">
           <!-- Images -->
           <div *ngFor="let image of images; let i = index" class="position-relative m-2">
-            <img [src]="image.data" class="h-100 rounded" draggable="false" />
+            <img [src]="image.exists ? image.downloadUrl : image.data" class="h-100 rounded" draggable="false" />
             <div *ngIf="!submitted" (click)="removeImage(i)" class="remove-image-button">
               <i class="fas fa-times-circle"></i>
             </div>
@@ -101,7 +101,7 @@
           <a *ngIf="!submitted" class="add-new-image d-inline-block rounded m-2" (click)="newImageInput.click()">
             <i class="fas fa-plus"></i>
             <!-- Hidden File Input -->
-            <input #newImageInput type="file" multiple (change)="imagesChosen()" class="d-none" />
+            <input #newImageInput type="file" multiple (change)="newImagesChosenHandler()" class="d-none" />
           </a>
 
           <!-- Padding Element -->

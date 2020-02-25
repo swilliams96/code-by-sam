@@ -1,4 +1,4 @@
-<div class="row mb-3">
+<div class="row mt-4 mb-5">
   <div class="col-lg-2">
     <ng-container *ngIf="image$ | async as imageUrl; else noImages">
       <img class="project-image" [src]="imageUrl" draggable="false" />
@@ -25,10 +25,12 @@
   <div class="col-lg-3 d-flex justify-content-center align-items-center">
     <div class="btn-group-vertical">
       <a class="btn btn-admin-light" [routerLink]="['/projects', project.slug]">View <i class="fas fa-eye ml-1"></i></a>
-      <a class="btn btn-admin-primary" [routerLink]="project.slug">Edit<i class="fal fa-pencil ml-1"></i></a>
+      <a class="btn btn-admin-primary" [routerLink]="['edit', project.slug]">Edit<i class="fal fa-pencil ml-1"></i></a>
       <a class="btn btn-admin-danger" (click)="deleteProject(project)">Delete<i class="fal fa-trash-alt ml-1"></i></a>
     </div>
   </div>
 </div>
+
+<hr />
 
 <ng-template #noData><i>none</i></ng-template>

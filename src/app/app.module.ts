@@ -27,7 +27,7 @@ import { AdminDashboardPageComponent } from './components/admin/admin-dashboard/
 import { LayoutPageComponent } from './components/portfolio/layout-page/layout-page.component';
 import { AdminLayoutPageComponent } from './components/admin/admin-layout-page/admin-layout-page.component';
 import { AdminProjectListComponent } from './components/admin/admin-project-list/admin-project-list.component';
-import { AdminNewProjectPageComponent } from './components/admin/admin-new-project-page/admin-new-project-page.component';
+import { AdminEditProjectPageComponent } from './components/admin/admin-edit-project-page/admin-edit-project-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminLoadingSpinnerComponent } from './components/admin/admin-loading-spinner/admin-loading-spinner.component';
 import { AdminProjectsPageComponent } from './components/admin/admin-projects-page/admin-projects-page.component';
@@ -51,7 +51,7 @@ import { AdminProjectListItemComponent } from './components/admin/admin-project-
     LayoutPageComponent,
     AdminLayoutPageComponent,
     AdminProjectListComponent,
-    AdminNewProjectPageComponent,
+    AdminEditProjectPageComponent,
     AdminLoadingSpinnerComponent,
     AdminProjectsPageComponent,
     AdminProjectListItemComponent

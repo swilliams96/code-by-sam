@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Project } from '../models/project.model';
+import { ProjectImage } from '../models/project-image.model';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -26,7 +27,7 @@ export class ProjectService {
   }
 
   /** Saves a project as a document in Firestore. */
-  async saveProject(project: Project, images: Image[]): Promise<void> {
+  async saveProject(project: Project, images: ProjectImage[]): Promise<void> {
     // First upload all the images for the project.
     project.images = await this._saveProjectImages(project.slug, images);
 
@@ -55,11 +56,23 @@ export class ProjectService {
     }
   }
 
+  /** Retrieves the Firebase Storage download URL for a given project's image. */
+  async getProjectImageStorageUrl(projectSlug: string, imageName: string): Promise<string | undefined> {
+    const project = this.projects.find(x => x.slug === projectSlug);
+
+    if (!project || !project.images || !project.images.find(x => x === imageName)) {
+      return;
+    }
+
+    const storageRef = this.storage.ref(`${this._storagePath}/${projectSlug}/${imageName}`);
+    return await storageRef.getDownloadURL().toPromise();
+  }
+
   /**
    * Saves new images to a project
    * @returns All of the URLs for each of the project's images.
    */
-  private async _saveProjectImages(projectSlug: string, images: Image[]): Promise<string[]> {
+  private async _saveProjectImages(projectSlug: string, images: ProjectImage[]): Promise<string[]> {
     if (!projectSlug) {
       console.error('Project slug required to save project images.');
     }
@@ -77,7 +90,7 @@ export class ProjectService {
     if (project) {
       console.log('    Existing project found, deleting missing images...');
       for (const existingImage of project.images || []) {
-        if (!images.find(x => x.url === existingImage)) {
+        if (!images.find(x => x.name === existingImage)) {
           // Remove any deleted existing images
           console.log('    Image: ', existingImage);
           const imageRef = storageRef.child(existingImage);

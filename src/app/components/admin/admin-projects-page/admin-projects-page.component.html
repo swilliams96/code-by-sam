@@ -9,5 +9,5 @@
     </div>
   </div>
 
-  <app-admin-project-list-item *ngFor="let project of projects$ | async" [project]="project"></app-admin-project-list-item>
+  <app-admin-project-list-item *ngFor="let project of projects$ | async; let i = index" [project]="project"></app-admin-project-list-item>
 </div>
