@@ -38,3 +38,10 @@ nav {
   top: -110px;
   transform: skew(0, -2deg);
 }
+
+::ng-deep {
+  .modal-header,
+  .modal-footer {
+    border: 0;
+  }
+}

@@ -18,8 +18,11 @@
   </div>
 
   <div id="main" class="bg-admin-dark text-admin-light">
-    <div class="header">
-      <router-outlet name="header"></router-outlet>
+    <div class="header d-flex justify-content-end align-items-center">
+      <a [routerLink]="['/']" class="btn btn-sm btn-outline-admin-primary">
+        View Site
+        <i class="far fa-arrow-right mx-1"></i>
+      </a>
     </div>
     <div class="content">
       <router-outlet></router-outlet>
